@@ -1,0 +1,15 @@
+version: '3.6'
+services:
+    pokedex_web:
+        container_name: pokedex_web
+        tty: true
+        stdin_open: true
+        build:
+          context: .
+        restart: always
+        volumes:
+            - .:/web
+        ports:
+            - 8000:8000
+        env_file: .env
+        command: bash -c "uvicorn --reload pokedex.asgi:application --host 0.0.0.0 --port 8000"
